@@ -1,67 +1,77 @@
-/* style.css — global styles for the Physics Lab site */
+/* style.css — گرافیک بالا برای آزمایشگاه حرکت (علوم نهم) */
 :root{
-  --bg:#f4f8fb;
-  --card:#ffffff;
-  --accent:#0b74b2;
-  --accent-2:#0a9cd6;
-  --muted:#6b6b6b;
+  --bg: #f3f8fb;
+  --card: #ffffff;
+  --accent: #0b74b2;
+  --accent-2: #0a9cd6;
+  --glass: rgba(255,255,255,0.7);
+  --muted: #6b6b6b;
+  --ok: #16a34a;
+  --warn: #d97706;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Tahoma, Arial, sans-serif;background:var(--bg);color:#111}
+html,body{height:100%;margin:0;font-family: "Vazirmatn", Tahoma, Arial, sans-serif;background:linear-gradient(180deg,#eef6fb,#f8fbff);color:#111}
 .container{max-width:1100px;margin:18px auto;padding:18px}
 .header{
   background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  color:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(11,116,178,0.18);
+  color:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(11,116,178,0.18);
 }
-.header h1{margin:0;font-size:22px}
+.header h1{margin:0;font-size:22px;font-weight:700}
 .header p{margin:6px 0 0;opacity:0.95;font-size:13px}
 
-/* layout */
+/* nav */
 .navbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
-.navbar a{background:#fff;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--accent);border:1px solid rgba(11,116,178,0.12)}
-.navbar a:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(10,156,214,0.12)}
+.navbar a{
+  background:linear-gradient(180deg,#fff,#f7fbff);
+  padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--accent);
+  border:1px solid rgba(11,116,178,0.10);box-shadow:0 6px 14px rgba(10,156,214,0.06)
+}
+.navbar a:hover{transform:translateY(-3px)}
 
-/* cards */
+/* card */
 .card{
-  background:var(--card);border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 6px 24px rgba(2,10,30,0.04)
+  background:var(--card);border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 8px 30px rgba(2,10,30,0.04)
 }
 .card h2{color:var(--accent);margin-top:0}
 
-/* example area + animation canvas */
+/* animation area */
 .anim-wrap{
-  background:linear-gradient(180deg,#fff,#f1fbff);border-radius:10px;padding:12px;margin:12px 0;position:relative;overflow:hidden;border:1px solid #e6f3ff;
-  height:220px;
+  background:linear-gradient(180deg,#ffffff,#eef9ff);border-radius:12px;padding:14px;margin:12px 0;position:relative;overflow:hidden;border:1px solid #e6f4ff;height:260px;
 }
-.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .controls label{font-size:14px;color:#333}
-.controls input[type=range]{width:180px}
+.controls input[type=range]{width:160px}
 
-/* answer box */
-.answer{
-  display:none;background:#e9f9ed;border-left:4px solid #28a745;padding:10px;border-radius:7px;margin-top:10px;color:#084b20;font-weight:600;
+/* fancy buttons */
+.btn{
+  padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:9px;cursor:pointer;font-weight:600;
+  box-shadow:0 8px 20px rgba(11,116,178,0.12);
 }
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(11,116,178,0.12)}
+.btn:active{transform:translateY(1px)}
 
-/* feedback */
-.warn{background:#fff4e6;border-left:4px solid #e08b00;padding:10px;border-radius:7px;margin-top:10px;color:#7a4b00}
+/* answer & feedback */
+.answer{display:none;background:#e9f9ed;border-left:4px solid var(--ok);padding:12px;border-radius:8px;margin-top:12px;color:#064e2b;font-weight:700}
+.warn{display:none;background:#fff4e6;border-left:4px solid var(--warn);padding:12px;border-radius:8px;margin-top:12px;color:#7a4b00}
 
 /* small helpers */
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .small{font-size:13px;color:var(--muted)}
+.kv{font-weight:700;color:var(--accent)}
 
-/* SVG styling for animated characters */
-svg.character{height:120px;display:block}
+/* character SVG styles (shared) */
+svg.character{height:140px}
 svg .wheel{stroke:#222;stroke-width:3;fill:none}
-svg .frame{stroke:#111;stroke-width:3;fill:none}
-svg .person{fill:#333}
+svg .frame{stroke:#0b74b2;stroke-width:3;fill:none}
+svg .person{fill:#0b3b58}
 
-/* quiz styles */
-.quiz-card{display:flex;flex-direction:column;gap:10px}
-.option{background:#f7fbff;border-radius:8px;padding:10px;border:1px solid #e6f3ff;cursor:pointer}
-.option.selected{outline:3px solid rgba(11,116,178,0.12);background:#eaf6ff}
-.score{background:#fff;color:#000;padding:10px;border-radius:8px;border-left:4px solid var(--accent);font-weight:700}
+/* quiz */
+.quiz-card{display:flex;flex-direction:column;gap:12px}
+.option{background:#f7fbff;border-radius:8px;padding:12px;border:1px solid #e6f7fe;cursor:pointer}
+.option.selected{outline:3px solid rgba(11,116,178,0.12);background:linear-gradient(180deg,#eaf6ff,#ffffff)}
+.score{background:#fff;padding:12px;border-radius:8px;border-left:4px solid var(--accent);font-weight:700}
 
 /* responsive */
-@media (max-width:720px){
+@media (max-width:760px){
   .anim-wrap{height:180px}
-  svg.character{height:90px}
+  svg.character{height:110px}
 }
