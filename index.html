@@ -1,46 +1,282 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>آزمایشگاه حرکت — فهرست</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>آزمایشگاه حرکت — علوم نهم</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body data-page="index">
-  <div class="container">
-    <header class="header">
-      <h1>آزمایشگاه تعاملی حرکت — علوم نهم</h1>
-      <p>هر مفهوم فصل حرکت یک صفحهٔ جدا دارد — مثال‌های کارتونی و انیمیشن سطح ۳ — آزمون حرفه‌ای</p>
+<body>
+  <div class="wrap">
+
+    <!-- سربرگ با اطلاعات ارائه‌دهنده و دبیر -->
+    <header class="top">
+      <div class="meta">
+        <div>ارائه‌دهنده: <strong>مبینا اعظمی</strong> — کلاس: <strong>9/2</strong> — دبیرستان پردیس</div>
+        <div>نام دبیر: <strong>خانم رفیعی</strong></div>
+      </div>
+      <h1>آزمایشگاه تعاملی — فصل حرکت (علوم نهم)</h1>
+      <p class="lead">درس‌نامهٔ کامل، مثال‌های تعاملی با انیمیشن سطح‌۳، و آزمون حرفه‌ای — همه در سه فایل</p>
     </header>
 
-    <nav class="navbar">
-      <a href="motion.html">مفهوم حرکت</a>
-      <a href="distance.html">مسافت</a>
-      <a href="displacement.html">جابه‌جایی (بردار)</a>
-      <a href="speed_velocity.html">سرعت و سرعت متوسط</a>
-      <a href="acceleration.html">شتاب</a>
-      <a href="graphs.html">نمودارها</a>
-      <a href="final_quiz.html">آزمون نهایی</a>
+    <!-- منو -->
+    <nav class="nav">
+      <button class="nav-btn" data-show="home">خانه</button>
+      <button class="nav-btn" data-show="concept">۱ — مفهوم حرکت</button>
+      <button class="nav-btn" data-show="distance">۲ — مسافت</button>
+      <button class="nav-btn" data-show="displacement">۳ — جابه‌جایی</button>
+      <button class="nav-btn" data-show="speed">۴ — تندی و سرعت</button>
+      <button class="nav-btn" data-show="avginst">۵ — تندی متوسط / لحظه‌ای</button>
+      <button class="nav-btn" data-show="acceleration">۶ — شتاب و معادلات</button>
+      <button class="nav-btn" data-show="examples">مثال‌های تکمیلی</button>
+      <button class="nav-btn" data-show="quiz">آزمون (حرفه‌ای)</button>
     </nav>
 
-    <div class="card">
-      <h2>نکات مهم قبل از شروع</h2>
-      <ul class="small">
-        <li>این سایت همهٔ مفاهیم فصل حرکت را به‌صورت دقیق و کامل پوشش می‌دهد.</li>
-        <li>هر صفحه دارای یک مثال تعاملی است — انیمیشن را کنترل کن، سرعت و شتاب را تغییر بده و نتیجه را ببین.</li>
-        <li>آزمون نهایی نمره‌دهی، بازخورد کامل و ذخیرهٔ پاسخ در مرورگر دارد.</li>
-      </ul>
-    </div>
+    <main class="content">
 
-    <div class="card">
-      <h2>فایل مرجع آپلود شده (اختیاری)</h2>
-      <p class="small">اگر خواستی از فایل آپلودی استفاده کنیم، مسیر محلی آن در این محیط این است:</p>
-      <pre class="small">/mnt/data/2025-11-25T06-33-31.802Z.jpg</pre>
-      <p class="small">(فعلاً تصاویر خارجی لازم نیست — همهٔ انیمیشن‌ها SVG هستند)</p>
-    </div>
+      <!-- HOME -->
+      <section id="home" class="page active">
+        <div class="card">
+          <h2>خوش آمدید</h2>
+          <p>این آزمایشگاه تمام مفاهیم فصل چهارم (حرکت) کتاب علوم نهم را جامع، مطابق تعاریف موجود در تصاویر ارسالی، توضیح می‌دهد و برای هر موضوع مثال تعاملی و سؤال ارائه می‌کند.</p>
+          <ul>
+            <li>تعاریف دقیق</li>
+            <li>تمام فرمول‌های مهم فصل</li>
+            <li>انیمیشن‌های SVG سطح‌۳ برای مثال‌ها</li>
+            <li>آزمون حرفه‌ای با ذخیره در مرورگر</li>
+          </ul>
+        </div>
+      </section>
 
+      <!-- CONCEPT: تعریف حرکت -->
+      <section id="concept" class="page">
+        <div class="card">
+          <h2>۱ — مفهوم حرکت</h2>
+
+          <p class="definition"><strong>تعریف (استخراج شده از تصاویر):</strong><br>
+            هرگاه موقعیت یک جسم نسبت به یک نقطهٔ مشخص (ناظر) در گذر زمان تغییر کند، می‌گوییم جسم <strong>در حال حرکت</strong> است؛ اگر موقعیت ثابت بماند، جسم ساکن است.</p>
+
+          <p class="note"><strong>نکات اصلی:</strong> توجه به ناظر (مرجع)، تفاوت حرکت انتقالی و دورانی، و مثال‌های روزمره.</p>
+
+          <h3>مثال تعاملی — دوچرخه‌سوار</h3>
+          <div class="stage">
+            <!-- SVG دوچرخه کارتونی سطح ۳ -->
+            <svg id="bike" class="character" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg">
+              <g id="bikeG">
+                <circle class="wheel" cx="140" cy="120" r="36"/>
+                <circle class="wheel" cx="320" cy="120" r="36"/>
+                <path class="frame" d="M140 120 L200 80 L260 110 L320 120" stroke-linecap="round" />
+                <circle class="person" cx="210" cy="60" r="8"/>
+                <g id="pedal" transform="translate(230,110)"><circle cx="0" cy="0" r="4" fill="#0b3b58"/><line x1="-12" y1="0" x2="12" y2="0" stroke="#0b3b58" stroke-width="3" stroke-linecap="round"/></g>
+              </g>
+            </svg>
+          </div>
+
+          <div class="controls">
+            <label>حالت:
+              <select id="bike-mode">
+                <option value="uniform">حرکت یکنواخت</option>
+                <option value="accelerate">شتاب‌دار</option>
+                <option value="pause">ایست</option>
+              </select>
+            </label>
+            <label>تندی نمایشی: <input id="bike-speed" type="range" min="0.4" max="4" step="0.1" value="1.2"></label>
+            <button class="btn" id="bike-start">شروع</button>
+            <button class="btn ghost" id="bike-stop">توقف</button>
+          </div>
+
+          <div class="exercise">
+            <h4>تمرین حل‌شده</h4>
+            <p>اگر دوچرخه‌سوار سرعت اولیه v₀ = 1.2 m/s و شتاب a = 0.4 m/s² داشته باشد، بعد از t = 3 s سرعت چقدر است؟</p>
+            <p class="solution">فرمول: v = v₀ + a·t → v = 1.2 + 0.4×3 = <strong>2.4 m/s</strong></p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DISTANCE -->
+      <section id="distance" class="page">
+        <div class="card">
+          <h2>۲ — مسافت</h2>
+
+          <p class="definition"><strong>مسافت:</strong> مجموع طول مسیری که جسم طی کرده است (مقدار اسکالر؛ همیشه مثبت یا صفر).</p>
+
+          <h3>مثال تعاملی — دونده</h3>
+          <div class="stage">
+            <div id="runner" class="runner-svg"></div>
+          </div>
+
+          <div class="controls">
+            <label>تندی نمایشی: <input id="run-speed" type="range" min="0.6" max="3.0" step="0.1" value="1.4"></label>
+            <button class="btn" id="run-start">شروع</button>
+            <button class="btn ghost" id="run-reset">بازنشانی</button>
+          </div>
+
+          <div class="exercise">
+            <h4>تمرین (دانش‌آموز وارد کند)</h4>
+            <p>دونده ۵ متر جلو و ۲ متر عقب می‌رود. مقادیر را وارد کن:</p>
+            <label>مسافت (m): <input id="input-s" style="width:90px"></label>
+            <label>جابه‌جایی (m): <input id="input-d" style="width:90px"></label>
+            <button class="btn" id="check-dist">بررسی</button>
+            <div id="dist-answer" class="answer">درست است — مسافت = 7 m ، جابه‌جایی = 3 m</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- DISPLACEMENT -->
+      <section id="displacement" class="page">
+        <div class="card">
+          <h2>۳ — جابه‌جایی (بردار)</h2>
+
+          <p class="definition"><strong>جابه‌جایی:</strong> برداری از نقطهٔ شروع تا نقطهٔ پایان؛ اندازه و جهت دارد. کوتاه‌ترین فاصلهٔ بین ابتدا و انتها.</p>
+          <p class="formula">در دو بعد: |r| = √(Δx² + Δy²)</p>
+
+          <h3>مثال تعاملی — رسم بردار</h3>
+          <div class="card small">
+            <label>Δx: <input id="vec-x" type="number" value="3" style="width:80px"></label>
+            <label>Δy: <input id="vec-y" type="number" value="4" style="width:80px"></label>
+            <button class="btn" id="vec-draw">رسم</button>
+            <div id="vec-stage" class="stage-small"></div>
+            <div id="vec-answer" class="answer">اندازهٔ بردار = 5</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPEED & VELOCITY -->
+      <section id="speed" class="page">
+        <div class="card">
+          <h2>۴ — تندی و سرعت</h2>
+
+          <p class="definition"><strong>تندی (اسکالر):</strong> اندازهٔ سرعت بدون جهت.<br>
+          <strong>سرعت (بردار):</strong> اندازه و جهت.</p>
+
+          <p class="formula"><strong>فرمول‌ها:</strong><br>
+            تندی متوسط: v_avg = S / t<br>
+            سرعت متوسط: v̅ = Δr / t<br>
+            تندی لحظه‌ای: v(t) = lim_{Δt→0} Δs/Δt (در عمل از مشتق یا اندازه‌گیری محلی استفاده می‌شود)</p>
+
+          <h3>مثال تعاملی — ماشین</h3>
+          <div class="stage">
+            <div id="car" class="car-svg"></div>
+          </div>
+
+          <div class="controls">
+            <label>حالت:
+              <select id="car-mode">
+                <option value="uniform">یکنواخت</option>
+                <option value="variable">شتاب‌دار</option>
+                <option value="pause">ایست</option>
+              </select>
+            </label>
+            <label>سرعت نمایشی: <input id="car-speed" type="range" min="0.6" max="6" step="0.2" value="1.8"></label>
+            <button class="btn" id="car-start">شروع</button>
+            <button class="btn ghost" id="car-stop">توقف</button>
+          </div>
+
+          <div class="exercise">
+            <h4>تمرین حل‌شده</h4>
+            <p>اگر جسمی ۲۰ m را در ۱۰ s طی کند → تندی متوسط = 20 ÷ 10 = <strong>2 m/s</strong></p>
+            <div>
+              <label>جواب شما: <input id="speed-input" style="width:90px"></label>
+              <button class="btn" id="speed-check">بررسی</button>
+              <div id="speed-answer" class="answer">درست — 2 m/s</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- AVG & INSTANT -->
+      <section id="avginst" class="page">
+        <div class="card">
+          <h2>۵ — تندی متوسط و تندی لحظه‌ای</h2>
+
+          <p class="definition"><strong>تندی متوسط:</strong> S / t — میانگین در کل بازه.<br>
+          <strong>تندی لحظه‌ای:</strong> تندی در یک لحظهٔ مشخص (مشتق مکان نسبت به زمان یا اندازه‌گیری موضعی).</p>
+
+          <div class="exercise">
+            <h4>مثال مقایسه‌ای</h4>
+            <p>بخشی با 2 m/s برای 5 s و بعد با 4 m/s برای 5 s → کل مسافت = 10 + 20 = 30 m، t = 10 s → v_avg = 3 m/s. تندی لحظه‌ای هر بخش = همان مقدار بخش.</p>
+
+            <p>سوال: اگر جسم در 20 s، 50 m طی کند، v_avg = ? (پاسخ در باکس زیر)</p>
+            <input id="ai-1" style="width:90px"><button class="btn" id="ai-check">بررسی</button>
+            <div id="ai-answer" class="answer">پاسخ: 2.5 m/s</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ACCELERATION -->
+      <section id="acceleration" class="page">
+        <div class="card">
+          <h2>۶ — شتاب و معادلات حرکت (شتاب ثابت)</h2>
+
+          <p class="definition"><strong>شتاب:</strong> تغییر سرعت در واحد زمان: a = Δv/Δt</p>
+
+          <h3>معادلات مهم (شتاب ثابت)</h3>
+          <ul>
+            <li>v = v₀ + a·t</li>
+            <li>s = v₀·t + ½ a t²</li>
+            <li>v² = v₀² + 2 a s</li>
+          </ul>
+
+          <h3>مثال تعاملی — راکت</h3>
+          <div class="stage">
+            <div id="rocket" class="rocket-svg"></div>
+          </div>
+
+          <div class="controls">
+            <label>شتاب نمایشی: <input id="acc-slider" type="range" min="0.2" max="3.0" step="0.1" value="0.6"></label>
+            <button class="btn" id="acc-start">شروع</button>
+            <button class="btn ghost" id="acc-stop">توقف</button>
+          </div>
+
+          <div class="exercise">
+            <p>تمرین: v₀ = 2 m/s ، a = 3 m/s² ، t = 4 s → v = ? ⇒ v = 2 + 3×4 = 14 m/s</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EXAMPLES: مثال های تکمیلی عمیق -->
+      <section id="examples" class="page">
+        <div class="card">
+          <h2>مثال‌های تکمیلی و عمیق (گام‌به‌گام)</h2>
+          <ol>
+            <li>حرکت با تغییر جهت: مثال مسیر منحنی، محاسبهٔ مسافت و جابه‌جایی.</li>
+            <li>مسئلهٔ چندبخشی سرعت: محاسبهٔ سرعت متوسط از چند بخش متوالی.</li>
+            <li>مسائل شتاب ثابت با محاسبهٔ s و v و زمان با استفاده از معادلات سه‌گانه.</li>
+          </ol>
+
+          <p class="small">(هر مثال در نسخه کامل شامل ورودی دانش‌آموز و تصحیح خودکار است؛ در این نسخه نمونه‌ها و قالب آماده‌اند تا در صورت نیاز سوال‌های بیشتر افزوده شود.)</p>
+        </div>
+      </section>
+
+      <!-- QUIZ -->
+      <section id="quiz" class="page">
+        <div class="card">
+          <h2>آزمون نهایی فصل حرکت</h2>
+          <p class="small">آزمون شامل سوالات چهارگزینه‌ای، نمره‌دهی، بازخورد سوال‌به‌سوال و ذخیرهٔ پاسخ‌ها در مرورگر است.</p>
+
+          <div id="quiz-container"></div>
+
+          <div class="quiz-controls">
+            <button class="btn" id="quiz-submit">ارسال و نمره‌گیری</button>
+            <button class="btn ghost" id="quiz-clear">پاک کردن پاسخ‌ها</button>
+          </div>
+
+          <div id="quiz-result" class="result"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      تهیه شده توسط مبینا اعظمی — مناسب کلاس نهم — نسخه نهایی آموزشی
+    </footer>
   </div>
 
-<script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
