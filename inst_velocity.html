@@ -4,24 +4,30 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>سرعت لحظه‌ای — آزمایشگاه حرکت</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-<header class="page-header">
-  <a class="back" href="index.html">⟵ بازگشت</a>
+<div class="header">
+  <div class="meta">ارائه‌دهنده: <strong>مبینا اعظمی</strong></div>
   <h1>سرعت لحظه‌ای</h1>
-</header>
+</div>
 
-<main class="card single">
-  <h2>تعریف</h2>
-  <p>به سرعت متحرک در هر لحظه از زمان <strong>سرعت لحظه‌ای</strong> می‌گویند. سرعت لحظه‌ای برداری است و علاوه بر اندازه، جهت نیز دارد.</p>
+<div class="container">
+  <a href="index.html" style="display:inline-block;margin-bottom:12px;background:var(--card-bg);padding:8px 12px;border-radius:8px;">⟵ بازگشت</a>
+  <div class="card">
+    <h2>تعریف</h2>
+    <p>به سرعت متحرک در هر لحظه از زمان <strong>سرعت لحظه‌ای</strong> می‌گویند. سرعت لحظه‌ای برداری است و جهت آن همان جهت بردار سرعت در آن لحظه است.</p>
 
-  <h3>رویکرد محاسباتی</h3>
-  <p>سرعت لحظه‌ای همان مشتق مکان نسبت به زمان است: <code>\mathbf{v}(t) = \dfrac{d\mathbf{r}}{dt}</code></p>
+    <h3>نمایش مفهومی</h3>
+    <p>سرعت لحظه‌ای را می‌توان با مشاهدهٔ اندازه و جهت حرکت در یک بازهٔ زمانی بسیار کوچک تصور کرد.</p>
 
-  <p>برای مشاهدهٔ نمونه‌های عددی از بخش شبیه‌ساز (games.html) استفاده کن.</p>
-</main>
+    <h3>مثال تعاملی</h3>
+    <div class="stage" id="inst-vel-stage">
+      <div style="position:absolute; right:20px; top:14px; font-weight:700;">نمایش جهت و اندازه</div>
+    </div>
+  </div>
+</div>
 
-<script src="scripts.js"></script>
+<script src="../main.js"></script>
 </body>
 </html>
