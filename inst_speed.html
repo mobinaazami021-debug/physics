@@ -4,28 +4,46 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>تندی لحظه‌ای — آزمایشگاه حرکت</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-<header class="page-header">
-  <a class="back" href="index.html">⟵ بازگشت</a>
+<div class="header">
+  <div class="meta">ارائه‌دهنده: <strong>مبینا اعظمی</strong></div>
   <h1>تندی لحظه‌ای</h1>
-</header>
+</div>
 
-<main class="card single">
-  <h2>تعریف</h2>
-  <p>تندی متحرک در هر لحظه را <strong>تندی لحظه‌ای</strong> می‌نامند. یکای اصلی تندی لحظه‌ای مانند تندی متوسط، متر بر ثانیه است.</p>
-  <p>نماد معمول: <code>v(t)</code> برای بیان تندی لحظه‌ای استفاده می‌شود.</p>
+<div class="container">
+  <a href="index.html" style="display:inline-block;margin-bottom:12px;background:var(--card-bg);padding:8px 12px;border-radius:8px;">⟵ بازگشت</a>
+  <div class="card">
+    <h2>تعریف</h2>
+    <p>تندی متحرک در هر لحظه را <strong>تندی لحظه‌ای</strong> می‌نامند. یکای اصلی این کمیت متر بر ثانیه (m/s) است.</p>
+    <p>نماد متداول برای تندی لحظه‌ای v(t) است؛ در کتاب نهم به‌صورت مفهومی بیان می‌شود (بدون مشتق رسمی).</p>
 
-  <h3>توضیح کوتاه</h3>
-  <p>در عمل، تندی لحظه‌ای را می‌توان با گرفتن حدِ تندی متوسط وقتی Δt→0 بدست آورد:</p>
-  <p><code>v(t) = \lim_{\Delta t \to 0} \dfrac{\Delta s}{\Delta t}</code></p>
+    <h3>مثال تعاملی (نمایشی)</h3>
+    <div id="inst-speed-stage" class="stage"></div>
+    <div class="controls">
+      <label>سرعت نمایشی: <input id="inst-speed-range" type="range" min="0.5" max="4" step="0.1" value="1.2"></label>
+      <button id="inst-start" class="btn">اجرا (نمایشی)</button>
+    </div>
+    <div style="margin-top:10px">برای ابزار دقیق‌تر از صفحهٔ «شبیه‌ساز» استفاده کن.</div>
+  </div>
+</div>
 
-  <h3>مثال تعاملی — اندازه‌گیری تندی لحظه‌ای</h3>
-  <div class="stage" id="inst-speed-stage"></div>
-  <p>برای مشاهدهٔ تندی لحظه‌ای، از شبیه‌ساز در صفحهٔ بازی‌ها استفاده کن (دقت زمانی و ورودی‌ها).</p>
-</main>
+<script>
+/* ساده: اتصال دکمه به انیمیشن Runner همانند distance */
+document.addEventListener('DOMContentLoaded', ()=>{
+  const stage = document.getElementById('inst-speed-stage');
+  if(stage && !document.getElementById('inst-runner')){
+    const r = document.createElement('div'); r.id='inst-runner'; r.className='runner'; stage.appendChild(r);
+  }
+  document.getElementById('inst-start')?.addEventListener('click', ()=>{
+    const r = document.getElementById('inst-runner'); let left=-120; r.style.left='-120px';
+    const sp = Number(document.getElementById('inst-speed-range').value)||1.2;
+    let t = setInterval(()=>{ left += sp*2.6; r.style.left=left+'px'; if(left > stage.clientWidth+80) { clearInterval(t); r.style.left='-120px'; } },24);
+  });
+});
+</script>
 
-<script src="scripts.js"></script>
+<script src="../main.js"></script>
 </body>
 </html>
