@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"><title>مسافت — آزمایشگاه</title><link rel="stylesheet" href="style.css"></head>
+<body data-page="distance">
+  <div class="container">
+    <header class="header"><h1>مسافت</h1><p>تعریف، روش محاسبه و مثال تعاملی</p></header>
+    <nav class="navbar"><a href="index.html">خانه</a><a href="displacement.html">جابه‌جایی</a></nav>
+
+    <div class="card">
+      <h2>مسافت چیست؟</h2>
+      <p>مسافت (scalar) مجموع طول مسیری است که جسم طی کرده است، بدون توجه به جهت. همیشه مقدار مثبت یا صفر است.</p>
+      <ul>
+        <li>مثال: رفت و برگشت یک جسم ۵m جلو و ۲m عقب → مسافت = 5 + 2 = 7 m</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>مثال تعاملی: دونده</h2>
+      <p class="small">دونده مسیر جلو و عقب را طی می‌کند. با کنترل «شروع» و «سرعت» مشاهده کن که مسافت چگونه محاسبه می‌شود.</p>
+      <div class="anim-wrap" id="run-area">
+        <div id="runner" style="--run-speed:1"></div>
+      </div>
+
+      <div class="controls">
+        <label>سرعت (نمایشی): <input id="run-speed" type="range" min="0.5" max="3" step="0.1" value="1"></label>
+        <button id="run-start">شروع</button><button id="run-reset">بازنشانی</button>
+      </div>
+
+      <div class="card small">
+        <b>تمرین:</b> دونده ۵ متر جلو می‌رود و ۲ متر عقب. مقدار مسافت و جابه‌جایی را وارد کن:
+        <br><input id="input-dist-a" placeholder="مسافت (m)"><input id="input-dist-b" placeholder="جابه‌جایی (m)"><button id="check-distance">بررسی</button>
+        <div id="ans-dist" class="answer">مسافت = 7 m — جابه‌جایی = 3 m</div>
+      </div>
+    </div>
+
+  </div>
+
+<script src="main.js"></script>
+
+<!-- runner specific styles -->
+<style>
+#runner{ width:36px;height:36px;background:linear-gradient(#ff6b6b,#ff3b3b);border-radius:50%;position:absolute;left:-60px;bottom:30px; box-shadow:0 6px 18px rgba(0,0,0,0.12) }
+#runner.run{ animation: runAnim calc(6s / var(--run-speed)) linear infinite }
+@keyframes runAnim{
+  0% { left:-60px }
+  40% { left:78% }
+  60% { left:48% }
+  100% { left:-60px }
+}
+</style>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"><title>سرعت — آزمایشگاه</title><link rel="stylesheet" href="style.css"></head>
+<body data-page="speed">
+  <div class="container">
+    <header class="header"><h1>سرعت و سرعت متوسط</h1><p>توضیح، واحدها، مثال و کنترل تندی با ماشین کارتونی</p></header>
+    <nav class="navbar"><a href="index.html">خانه</a><a href="acceleration.html">شتاب</a></nav>
+
+    <div class="card">
+      <h2>تعریف‌ها</h2>
+      <p><b>سرعت متوسط</b> = مسافت کلی ÷ زمان کل. <b>سرعت لحظه‌ای</b> همان سرعت در یک لحظهٔ مشخص است (مشتق مکان نسبت به زمان).</p>
+    </div>
+
+    <div class="card">
+      <h2>مثال تعاملی: ماشین</h2>
+      <p class="small">حالت‌ها: یکنواخت یا متغیر (شتاب). سرعت عددی را وارد کن یا حالت را انتخاب کن. در حالت متغیر، تندی به مرور افزایش می‌یابد (نمونهٔ شتاب مثبت).</p>
+
+      <div class="anim-wrap">
+        <div id="car" style="--car-speed:1.8"></div>
+      </div>
+
+      <div class="controls">
+        <label>مد: <select id="car-mode"><option value="uniform">یکنواخت</option><option value="variable">شتاب دار</option></select></label>
+        <label>سرعت اولیه: <input id="car-speed" type="range" min="0.6" max="6" step="0.2" value="1.8"></label>
+        <button id="car-start">شروع</button><button id="car-stop">توقف</button>
+      </div>
+
+      <div class="card small">
+        <b>تمرین:</b> یک جسم ۲۰ m را در ۱۰ s طی می‌کند؛ سرعت متوسط؟  
+        <br><input id="input-speed" placeholder="پاسخ (m/s)"><button id="check-speed">بررسی</button>
+        <div id="ans-speed" class="answer">پاسخ صحیح: 2 m/s</div>
+      </div>
+    </div>
+
+  </div>
+<script src="main.js"></script>
+
+<style>
+#car{ width:80px;height:36px;background:linear-gradient(#0b74b2,#0a9cd6);border-radius:8px;position:absolute;left:-120px;bottom:18px;box-shadow:0 8px 20px rgba(0,0,0,0.12)}
+#car.drive{ animation: carDrive calc(8s / var(--car-speed)) linear infinite }
+@keyframes carDrive{ from{left:-140px} to{left:110%} }
+</style>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"><title>شتاب — آزمایشگاه</title><link rel="stylesheet" href="style.css"></head>
+<body data-page="acceleration">
+  <div class="container">
+    <header class="header"><h1>شتاب</h1><p>تعریف شتاب، سرعت نقطه‌ای، مثال راکتی با شتاب متغیر</p></header>
+    <nav class="navbar"><a href="index.html">خانه</a><a href="speed_velocity.html">سرعت</a></nav>
+
+    <div class="card">
+      <h2>تعریف شتاب</h2>
+      <p>شتاب تغییر سرعت در واحد زمان است: a = Δv / Δt.</p>
+    </div>
+
+    <div class="card">
+      <h2>مثال: راکت</h2>
+      <p class="small">راکت از حالت سکون شتاب می‌گیرد؛ با افزایش مقدار شتاب در کنترل، سرعت راکت افزایش می‌یابد و حرکت سریع‌تر می‌شود.</p>
+      <div class="anim-wrap">
+        <div id="rocket" style="--rocket-speed:1"></div>
+      </div>
+      <div class="controls">
+        <label>شتاب (نمایشی): <input id="acc-value" type="range" min="0.4" max="3" step="0.1" value="0.6"></label>
+        <button id="acc-start">شروع</button><button id="acc-stop">توقف</button>
+      </div>
+    </div>
+  </div>
+<script src="main.js"></script>
+
+<style>
+#rocket{ width:40px;height:60px;background:linear-gradient(#ffb84d,#ff6b1f);border-radius:8px;position:absolute;left:calc(50% - 20px);bottom:10px;transform-origin:center bottom }
+#rocket.fly{ animation: rocketFly 6s linear infinite }
+@keyframes rocketFly{
+  0%{ transform:translateY(0) scale(1); box-shadow:0 6px 18px rgba(0,0,0,0.12) }
+  50%{ transform:translateY(-220px) scale(1.05) }
+  100%{ transform:translateY(0) scale(1) }
+}
+</style>
+</body>
+</html>

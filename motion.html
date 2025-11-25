@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مفهوم حرکت — آزمایشگاه</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="motion">
+  <div class="container">
+    <header class="header"><h1>مفهوم حرکت</h1><p>تعریف، طبقه‌بندی حرکت و مثال کارتونی: دوچرخه‌سوار</p></header>
+    <nav class="navbar"><a href="index.html">خانه</a><a href="distance.html">مسافت</a><a href="final_quiz.html">آزمون</a></nav>
+
+    <div class="card">
+      <h2>تعریف حرکت</h2>
+      <p>هرگاه مکان جسم نسبت به یک نقطهٔ مرجع در طول زمان تغییر کند می‌گوییم جسم در حال حرکت است. حرکت‌ها می‌توانند انتقالی (خطی)، دورانی، تصادفی یا ترکیبی باشند.</p>
+      <ul>
+        <li><b>حرکت انتقالی:</b> همهٔ نقاط جسم مسیرهای موازی دارند (مثلاً خودرو در جاده مستقیم)</li>
+        <li><b>حرکت دورانی:</b> نقاط جسم حول یک محور می‌چرخند (مثلاً چرخ)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>مثال تعاملی: دوچرخه‌سوار</h2>
+      <p class="small">در این مثال دوچرخه‌سوار از چپ به راست حرکت می‌کند. می‌توانی سرعت را تغییر دهی یا حرکت را متوقف کنی. در حالت «حرکت یکنواخت» تندی ثابت است؛ در حالت «شتاب» تندی افزایش می‌یابد و پاها سریع‌تر می‌چرخند.</p>
+
+      <div class="anim-wrap">
+        <!-- bike SVG: class & CSS کنترل می‌کند -->
+        <svg id="bike-svg" class="character" viewBox="0 0 220 120" style="--bike-speed:1.2">
+          <!-- wheels -->
+          <g transform="translate(10,10)">
+            <circle class="wheel" cx="40" cy="80" r="22"></circle>
+            <circle class="wheel" cx="140" cy="80" r="22"></circle>
+            <!-- frame -->
+            <path class="frame" d="M40 80 L80 45 L120 60 L140 80"></path>
+            <circle class="person" cx="85" cy="40" r="6"></circle>
+            <!-- pedals (animated via CSS rotate) -->
+            <g id="pedals" transform="translate(90,65)">
+              <circle cx="0" cy="0" r="4" fill="#333"></circle>
+              <line x1="-12" y1="0" x2="12" y2="0" stroke="#333" stroke-width="3"></line>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="controls">
+        <label>مد حرکت:
+          <select id="bike-mode">
+            <option value="uniform">حرکت یکنواخت</option>
+            <option value="accelerate">شتاب دار</option>
+            <option value="pause">ایست</option>
+          </select>
+        </label>
+        <label>سرعت: <input id="bike-speed" type="range" min="0.4" max="3" step="0.1" value="1.2"></label>
+        <button id="bike-start">شروع</button>
+        <button id="bike-stop">متوقف</button>
+      </div>
+
+      <div class="small">ملاحظه: «تندی» همان اندازهٔ عددی سرعت است؛ در UI ما هم به شکل عددی و هم انیمیشنی قابل کنترل است.</div>
+
+      <div class="card small">
+        <b>تمرین:</b> دوچرخه‌سوار با حالت «شتاب دار» حرکت می‌کند. اگر سرعت اولیه 1.2 m/s و شتاب متوسط 0.4 m/s² باشد، پس از 3 ثانیه سرعت چقدر است؟  
+        <br><input id="q-m1" placeholder="پاسخ (m/s)"><button id="check-m1">بررسی</button>
+        <div id="ans-m1" class="answer">پاسخ: v = v0 + a·t = 1.2 + 0.4×3 = 2.4 m/s</div>
+      </div>
+
+    </div>
+
+  </div>
+
+<script src="main.js"></script>
+
+<!-- Inline CSS specifically for bike animation (keeps main.css generic) -->
+<style>
+#bike-svg{ position:absolute; left:-240px; bottom:16px; transition:left linear; }
+#bike-svg.moving{ left:110%; transition-duration: calc(10s / var(--bike-speed)); }
+#bike-svg .wheel{ transform-origin: 40px 80px; animation: wheel-rot calc(1s / var(--bike-speed)) linear infinite; }
+#bike-svg .wheel:nth-child(2){ transform-origin: 140px 80px; }
+@keyframes wheel-rot{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+/* pedals rotate faster with speed */
+#pedals{ transform-origin: 0px 0px; animation: pedal-rot calc(0.8s / var(--bike-speed)) linear infinite; }
+@keyframes pedal-rot{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+#bike-svg:not(.moving){ animation-play-state:paused; }
+</style>
+
+</body>
+</html>

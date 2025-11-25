@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"><title>نمودارها — x–t و v–t</title><link rel="stylesheet" href="style.css"></head>
+<body data-page="graphs">
+  <div class="container">
+    <header class="header"><h1>نمودارهای مکان–زمان و سرعت–زمان</h1><p>تعریف‌ها، تحلیل و رسم نمونه‌ها</p></header>
+    <nav class="navbar"><a href="index.html">خانه</a><a href="final_quiz.html">آزمون</a></nav>
+
+    <div class="card">
+      <h2>مفاهیم</h2>
+      <ul>
+        <li><b>نمودار x–t:</b> مکان نسبت به زمان — شیب نشان‌دهندهٔ سرعت است.</li>
+        <li><b>نمودار v–t:</b> سرعت نسبت به زمان — سطح زیر منحنی نشان‌دهندهٔ جابه‌جایی است.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>رسم نمونه</h2>
+      <canvas id="graph-canvas" width="900" height="260" style="width:100%;border-radius:8px;border:1px solid #eee;background:#fff"></canvas>
+      <div class="controls">
+        <button id="graph-uniform">حرکت یکنواخت</button>
+        <button id="graph-rest">سکون</button>
+        <button id="graph-acc">شتاب ثابت</button>
+      </div>
+    </div>
+  </div>
+
+<script src="main.js"></script>
+</body>
+</html>
