@@ -1,92 +1,89 @@
-/* main.js — کنترل صفحات، انیمیشن سطح 3، و آزمون پیشرفته */
+/* main.js — کنترل صفحات، انیمیشن کارتونی سطح 3، و آزمون حرفه‌ای */
+/* هدف: کار در موبایل و دسکتاپ، خطاگیری کم، بدون وابستگی به لایبرری خارجی */
 
-/* --- helper selectors --- */
-const $ = s => document.querySelector(s);
-const $$ = s => Array.from(document.querySelectorAll(s));
+/* helpers */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+function on(sel, ev, fn){ const el = $(sel); if(el) el.addEventListener(ev, fn); }
+function create(tag, attrs = {}){ const el = document.createElement(tag); Object.entries(attrs).forEach(([k,v])=> el.setAttribute(k,v)); return el; }
 
-/* --- navigation --- */
-$$('.nav-btn').forEach(b=>{
-  b.addEventListener('click', ()=> {
-    const id = b.dataset.show || b.getAttribute('data-show');
-    showPage(id);
+/* navigation */
+$$('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const id = btn.dataset.show;
+    if(!id) return;
+    $$('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById(id);
+    if(page) page.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
   });
 });
-function showPage(id){
-  if(!id) return;
-  $$('.page').forEach(p=>p.classList.remove('active'));
-  const el = document.getElementById(id);
-  if(el) el.classList.add('active');
-  // hide menu area if showing page
-  window.scrollTo({top:0, behavior:'smooth'});
-}
 
-/* --- show home on load --- */
-document.addEventListener('DOMContentLoaded', ()=>{
-  showPage('home');
+/* ensure home visible on load */
+document.addEventListener('DOMContentLoaded', ()=> {
+  $$('.page').forEach(p=>p.classList.remove('active'));
+  $('#home').classList.add('active');
 });
 
-/* ==================== BIKE ANIMATION (motion) ==================== */
+/* ================= BIKE animation (concept) ================= */
 (function(){
-  const bike = $('#bike'); // svg group
-  const start = $('#bike-start'), stop = $('#bike-stop'), speedRange = $('#bike-speed'), mode = $('#bike-mode');
-  let bikeTimer = null;
-
-  function resetBikePos(){
-    if(!bike) return;
+  const bike = $('#bike'); // svg element
+  const btnStart = $('#bike-start-c'), btnStop = $('#bike-stop-c'), speedRange = $('#bike-speed-c'), mode = $('#bike-mode-c');
+  if(!bike) return;
+  let timer = null;
+  function reset(){
     bike.style.transform = 'translateX(-260px)';
-    // reset wheel/pedal transforms
+    bike.style.transition = 'none';
     bike.querySelectorAll('.wheel').forEach(w=> w.style.transform = 'rotate(0deg)');
     const ped = bike.querySelector('#pedal');
     if(ped) ped.setAttribute('transform','translate(230,110)');
   }
-  resetBikePos();
-
-  function startBike(){
-    if(bikeTimer) clearInterval(bikeTimer);
+  reset();
+  function start(){
+    if(timer) clearInterval(timer);
     let left = -260;
     let sp = parseFloat(speedRange.value || 1.2);
-    bikeTimer = setInterval(()=>{
+    timer = setInterval(()=>{
       if(mode.value === 'accelerate') sp = Math.min(4, sp + 0.02);
-      left += sp * 2.6;
+      left += sp * 2.4;
       bike.style.transform = `translateX(${left}px)`;
       const rot = left * 3;
       bike.querySelectorAll('.wheel').forEach(w=> w.style.transform = `rotate(${rot}deg)`);
       const ped = bike.querySelector('#pedal');
       if(ped) ped.setAttribute('transform', `translate(230,110) rotate(${rot*1.6})`);
-      if(left > 800){ clearInterval(bikeTimer); bikeTimer = null; resetBikePos(); }
+      if(left > 900){ clearInterval(timer); timer = null; reset(); }
     }, 30);
   }
-  function stopBike(){ if(bikeTimer) clearInterval(bikeTimer); bikeTimer = null; }
-  start.addEventListener('click', startBike);
-  stop.addEventListener('click', stopBike);
-  speedRange.addEventListener('input', ()=>{}); // read value on start
+  btnStart && btnStart.addEventListener('click', start);
+  btnStop && btnStop.addEventListener('click', ()=>{ if(timer) clearInterval(timer); timer=null; reset(); });
 })();
 
-/* ==================== RUNNER ANIMATION (distance) ==================== */
+/* ================= RUNNER (distance) ================= */
 (function(){
-  const runner = $('#runner');
-  const start = $('#run-start'), reset = $('#run-reset'), speedRange = $('#run-speed');
-  let runTimer = null;
-  function resetRunner(){ if(runner) runner.style.left = '-80px'; }
-  resetRunner();
-
-  function startRun(){
-    if(runTimer) clearInterval(runTimer);
-    const stage = $('#distance .stage') || document.querySelector('.stage');
-    let left = -80; let sp = parseFloat(speedRange.value || 1.4);
-    runTimer = setInterval(()=>{
+  const runner = $('#runner-char'), startBtn = $('#run-start-c'), stopBtn = $('#run-stop-c'), spRange = $('#run-speed-c');
+  if(!runner) return;
+  let t = null;
+  function reset(){ runner.style.left = '-80px'; }
+  reset();
+  function start(){
+    if(t) clearInterval(t);
+    const stage = $('#stage-distance');
+    let left = -80;
+    let sp = parseFloat(spRange.value || 1.4);
+    t = setInterval(()=>{
       left += sp * 2.2;
       runner.style.left = left + 'px';
-      if(left > (stage.clientWidth + 120)){ clearInterval(runTimer); runTimer = null; resetRunner(); }
+      if(left > (stage.clientWidth + 120)){ clearInterval(t); t=null; reset(); }
     }, 28);
   }
-  start.addEventListener('click', startRun);
-  reset.addEventListener('click', ()=>{ if(runTimer) clearInterval(runTimer); runTimer=null; resetRunner(); });
+  startBtn && startBtn.addEventListener('click', start);
+  stopBtn && stopBtn.addEventListener('click', ()=>{ if(t) clearInterval(t); t=null; reset(); });
 })();
 
-/* ==================== VECTOR DRAW (displacement) ==================== */
+/* ================= VECTOR DRAW (displacement) ================= */
 (function(){
-  const drawBtn = $('#vec-draw'), vx = $('#vec-x'), vy = $('#vec-y'), stage = $('#vec-stage'), ans = $('#vec-answer');
+  const drawBtn = $('#vec-draw-c'), vx = $('#vec-x-c'), vy = $('#vec-y-c'), stage = $('#vec-stage-c'), ans = $('#vec-answer-c');
+  if(!drawBtn) return;
   function draw(){
     const x = Number(vx.value||0), y = Number(vy.value||0);
     stage.innerHTML = '';
@@ -106,128 +103,120 @@ document.addEventListener('DOMContentLoaded', ()=>{
   draw();
 })();
 
-/* ==================== CAR (speed) ==================== */
+/* ================= CAR (speed) ================= */
 (function(){
-  const car = $('#car'), start = $('#car-start'), stop = $('#car-stop'), mode = $('#car-mode'), speedRange = $('#car-speed');
-  let carTimer = null;
-  function resetCar(){ if(car) car.style.left = '-140px'; }
-  resetCar();
-  function startCar(){
-    if(carTimer) clearInterval(carTimer);
-    const stage = document.querySelector('#speed .stage') || document.querySelector('.stage');
-    let left = -140; let sp = Number(speedRange.value || 1.8);
-    carTimer = setInterval(()=>{
+  const car = $('#car-char'), startBtn = $('#car-start-c'), stopBtn = $('#car-stop-c'), mode = $('#car-mode-c'), spRange = $('#car-speed-c');
+  if(!car) return;
+  let t = null;
+  function reset(){ car.style.left = '-160px'; }
+  reset();
+  function start(){
+    if(t) clearInterval(t);
+    const stage = $('#stage-speed');
+    let left = -160;
+    let sp = Number(spRange.value || 1.8);
+    t = setInterval(()=>{
       if(mode.value === 'variable') sp = Math.min(8, sp + 0.08);
       left += sp * 2.6;
       car.style.left = left + 'px';
-      if(left > stage.clientWidth + 140){ clearInterval(carTimer); carTimer = null; resetCar(); }
+      if(left > stage.clientWidth + 160){ clearInterval(t); t=null; reset(); }
     }, 28);
   }
-  function stopCar(){ if(carTimer) clearInterval(carTimer); carTimer = null; }
-  start.addEventListener('click', startCar);
-  stop.addEventListener('click', stopCar);
+  startBtn && startBtn.addEventListener('click', start);
+  stopBtn && stopBtn.addEventListener('click', ()=>{ if(t) clearInterval(t); t=null; reset(); });
 })();
 
-/* ==================== ROCKET (acceleration) ==================== */
+/* ================= ROCKET (acceleration) ================= */
 (function(){
-  const rocket = $('#rocket'), start = $('#acc-start'), stop = $('#acc-stop'), acc = $('#acc-slider');
-  let rocketTimer = null;
-  function resetRocket(){ if(rocket) rocket.style.transform = 'translateY(0px)'; }
-  resetRocket();
-  function startRocket(){
-    if(rocketTimer) clearInterval(rocketTimer);
+  const rocket = $('#rocket-char'), startBtn = $('#acc-start-c'), stopBtn = $('#acc-stop-c'), slider = $('#acc-slider-c');
+  if(!rocket) return;
+  let t = null;
+  function reset(){ rocket.style.transform = 'translateY(0px)'; }
+  reset();
+  function start(){
+    if(t) clearInterval(t);
     let v = 1;
-    rocketTimer = setInterval(()=>{
-      v += Number(acc.value)/80;
-      const up = Math.min(220, v * 40);
+    t = setInterval(()=>{
+      v += Number(slider.value)/80;
+      const up = Math.min(220, v*40);
       rocket.style.transform = `translateY(${-up}px)`;
-      if(up >= 220){ clearInterval(rocketTimer); rocketTimer = null; resetRocket(); }
+      if(up >= 220){ clearInterval(t); t=null; reset(); }
     }, 120);
   }
-  function stopRocket(){ if(rocketTimer) clearInterval(rocketTimer); rocketTimer = null; resetRocket(); }
-  start.addEventListener('click', startRocket);
-  stop.addEventListener('click', stopRocket);
+  startBtn && startBtn.addEventListener('click', start);
+  stopBtn && stopBtn.addEventListener('click', ()=>{ if(t) clearInterval(t); t=null; reset(); });
 })();
 
-/* ==================== CHECKERS for simple exercises ==================== */
+/* ================= SIMPLE CHECKERS (exercises) ================= */
 (function(){
-  $('#check-dist').addEventListener('click', ()=>{
-    const s = $('#input-s').value.trim(), d = $('#input-d').value.trim();
-    if(s === '7' && (d === '3' || d === '۳')) $('#dist-answer').style.display = 'block';
-    else alert('پاسخ درست نیست — مسافت = 7 ، جابه‌جایی = 3');
+  // concept q1
+  on('#q1-check','click', ()=>{
+    const v = $('#q1').value.trim();
+    if(v === 'ساکن' || v === 'ساکن.') show('#q1-answer');
+    else alert('جواب درست: ساکن');
   });
-  $('#speed-check').addEventListener('click', ()=>{
-    const v = $('#speed-input').value.trim();
-    if(v === '2' || v === '۲') $('#speed-answer').style.display = 'block';
-    else alert('پاسخ را بررسی کن — 20 ÷ 10 = 2');
+
+  // distance
+  on('#dist-check','click', ()=>{
+    const s = $('#dist-s').value.trim(), d = $('#dist-d').value.trim();
+    if(s === '7' && (d === '3' || d === '۳')) show('#dist-answer'); else alert('پاسخ: مسافت=7 , جابه‌جایی=3');
   });
-  $('#ai-check').addEventListener('click', ()=>{
-    const v = $('#ai-1').value.trim();
-    if(v === '2.5' || v === '2٫5') $('#ai-answer').style.display = 'block';
-    else alert('پاسخ را بازبینی کن (50 ÷ 20 = 2.5)');
+
+  // speed
+  on('#speed-check-c','click', ()=>{
+    const v = $('#speed-input-c').value.trim();
+    if(v === '2' || v === '۲') show('#speed-answer-c'); else alert('پاسخ صحیح: 2 m/s');
+  });
+
+  // avginst
+  on('#ai-check-c','click', ()=>{
+    const v = $('#ai-input-c').value.trim();
+    if(v === '3' || v === '۳') show('#ai-answer-c'); else alert('مقدار درست: 3 m/s (مثال مقایسه‌ای)');
   });
 })();
 
-/* ==================== QUIZ: professional (many questions) ==================== */
+/* ================= QUIZ (professional) ================= */
 (function(){
-  const quizContainer = $('#quiz-container'), submit = $('#quiz-submit'), clearBtn = $('#quiz-clear'), result = $('#quiz-result');
+  const container = $('#quiz-container'), submit = $('#quiz-submit'), clearBtn = $('#quiz-clear'), result = $('#quiz-result');
 
-  // Deep question bank covering the chapter (expandable)
   const bank = [
-    {q:'تعریف حرکت چیست؟', opts:['تغییر مکان نسبت به ناظر','تغییر شکل جسم','تغییر زمان','تغییر جرم'], a:0},
-    {q:'مسافت چیست؟', opts:['مقدار جهت‌دار','مجموع طول مسیر طی‌شده','شیب نمودار','تندی لحظه‌ای'], a:1},
-    {q:'جابه‌جایی چیست؟', opts:['مقدار بدون جهت','فاصلهٔ مستقیم با جهت','مسافت ÷ زمان','شتاب'], a:1},
-    {q:'تندی متوسط چگونه محاسبه می‌شود؟', opts:['Δr/Δt','S/t','dv/dt','v·t'], a:1},
-    {q:'تندی لحظه‌ای چیست؟', opts:['میانگین بر بازه','تندی در یک لحظه','جمع سرعت‌ها','مسافت در لحظه'], a:1},
-    {q:'سرعت چه تفاوتی با تندی دارد؟', opts:['سرعت بدون جهت است','سرعت بردار است (جهت دارد)','سرعت زمان است','سرعت جرم است'], a:1},
-    {q:'v = v₀ + a·t برای چه نوع حرکت به کار می‌رود؟', opts:['شتاب ثابت','حرکت دورانی','مجموع سرعت‌ها','حرکت یکنواخت'], a:0},
-    {q:'s = v₀·t + 1/2 a t² چه‌چیزی محاسبه می‌کند؟', opts:['شتاب','مکان (مسافت طی‌شده)','واحد زمان','مقدار سرعت'], a:1},
-    {q:'v² = v₀² + 2 a s چه زمانی کاربرد دارد؟', opts:['وقتی شتاب ثابت است','وقتی سرعت صفر است','وقتی حرکت دایره‌ای است','وقتی زمان معلوم نیست'], a:0},
-    {q:'اگر جسمی 5m جلو و 2m عقب برود، مسافت و جابه‌جایی؟', opts:['مسافت=3, جابه‌جایی=7','مسافت=7, جابه‌جایی=3','مسافت=0, جابه‌جایی=3','مسافت=7, جابه‌جایی=0'], a:1},
-    {q:'سطح زیر منحنی v–t چه کمیتی را نشان می‌دهد؟', opts:['شتاب','توان','جابه‌جایی','تندی لحظه‌ای'], a:2},
-    {q:'در نمودار x–t خط افقی به چه معناست؟', opts:['شتاب ثابت','سکون','سرعت مثبت','حرکت شتاب‌دار'], a:1},
-    {q:'واحد شتاب در SI چیست؟', opts:['m','m/s','m/s^2','s'], a:2},
-    {q:'اگر v₀=2 m/s و a=3 m/s²، سرعت پس از 4 s چیست؟', opts:['14 m/s','12 m/s','10 m/s','8 m/s'], a:1},
-    {q:'تندی متوسط یک خودرو که 120 km در 2 h طی کرده؟', opts:['40','50','60','30'], a:2},
-    {q:'برای محاسبه تندی لحظه‌ای از چه روشی استفاده می‌کنیم؟', opts:['تقسیم کل مسافت بر کل زمان','شیب مماس بر نمودار x–t','جمع سرعت‌ها','تفاضل جابه‌جایی‌ها'], a:1},
-    {q:'در حرکت یکنواخت شتاب چقدر است؟', opts:['صفر','مثبت','منفی','متغیر'], a:0},
-    {q:'تندی متوسط وقتی Δt→0 به چه مقدار نزدیک می‌شود؟', opts:['تندی لحظه‌ای','مسافت','شتاب','زمان'], a:0},
-    {q:'مسئله: جسمی با سرعت 3 m/s به مدت 4 s حرکت می‌کند، چه مسافتی طی می‌شود؟', opts:['12 m','7 m','1.33 m','16 m'], a:0},
-    {q:'اگر نمودار v–t یک خط با شیب مثبت باشد، چه چیزی نشان می‌دهد؟', opts:['سرعت ثابت','شتاب مثبت','سکون','مسافت ثابت'], a:1},
-    {q:'در حرکت شتاب ثابت، اگر v0=0 و a=2, t=5, s = ?', opts:['25','10','50','5'], a:1}, // s = 0*5 + 0.5*2*25 =25 -> correct is 25 actually; pick consistent: here a=2,t=5 => s=0.5*2*25=25. Let's set answer index accordingly.
-    {q:'کدام عبارت درباره جابه‌جایی درست است؟', opts:['همواره مثبت است','می‌تواند جهتی داشته باشد','همواره برابر مسافت است','همواره صفر است'], a:1},
-    {q:'در حرکت دورانی، کدام کمیت جهت‌دار است؟', opts:['مقدار سرعت خطی','زمان','تندی متوسط','مسافت'], a:0},
-    {q:'اگر جسمی از A به B و دوباره به A بازگردد، جابه‌جایی برابر است با؟', opts:['مسافت طی شده','صفر','نیمه مسیر','مقدار بستگی دارد'], a:1},
-    {q:'برای یک حرکت که سرعت آن v(t)=3t (m/s)، شتاب آن چقدر است؟', opts:['3 m/s²','t m/s²','0','9 m/s²'], a:0},
-    {q:'کدام فرمول برای محاسبه شتاب متوسط استفاده می‌شود؟', opts:['Δs/Δt','Δv/Δt','v·t','s·t'], a:1}
+    {q:'تعریف حرکت چیست؟', opts:['تغییر شکل','تغییر مکان نسبت به ناظر','تغییر رنگ','تغییر دما'], a:1},
+    {q:'مسافت چیست؟', opts:['فاصلهٔ مستقیم','مجموع طول مسیر','شیب نمودار','کمیت برداری'], a:1},
+    {q:'جابه‌جایی چیست؟', opts:['مقدار بدون جهت','فاصلهٔ مستقیم با جهت','زمان','جرم'], a:1},
+    {q:'تندی متوسط چگونه محاسبه می‌شود؟', opts:['S/t','Δr/Δt','dv/dt','v·t'], a:0},
+    {q:'تندی لحظه‌ای یعنی؟', opts:['میانگین بر بازه','مقدار در یک لحظه','جمع سرعت‌ها','تفاضل زمان‌ها'], a:1},
+    {q:'v = v₀ + a·t برای چه وضعیتی؟', opts:['شتاب ثابت','حرکت یکنواخت','حرکت دایره‌ای','حرکت نوسانی'], a:0},
+    {q:'s = v₀·t + 1/2 a t² کاربردش چیست؟', opts:['محاسبه شتاب','محاسبه مکان (جابه‌جایی)','محاسبه زمان','محاسبه جرم'], a:1},
+    {q:'اگر جسم 5m جلو و 2m عقب برود، جابه‌جایی؟', opts:['7m','3m','-3m','0m'], a:1},
+    {q:'سطح زیر منحنی v–t چه چیزی را نشان می‌دهد؟', opts:['شتاب','جابه‌جایی','تندی','زمان'], a:1},
+    {q:'در حرکت یکنواخت شتاب؟', opts:['۰','مثبت','منفی','متغیر'], a:0},
+    // ... (می‌توانی این لیست را بزرگتر کنی؛ الان 10+ سوال پایه‌ای است)
   ];
 
-  // render quiz
   function render(){
-    quizContainer.innerHTML = '';
-    bank.forEach((q,i)=>{
-      const div = document.createElement('div'); div.className='qcard';
-      const h = document.createElement('h3'); h.textContent = (i+1) + '. ' + q.q; div.appendChild(h);
-      q.opts.forEach((opt,j)=>{
-        const o = document.createElement('div'); o.className='option'; o.textContent = opt;
+    container.innerHTML = '';
+    bank.forEach((item, idx)=>{
+      const card = create('div'); card.className = 'qcard';
+      const h = create('h3'); h.textContent = (idx+1) + '. ' + item.q; card.appendChild(h);
+      item.opts.forEach((op, j)=>{
+        const o = create('div'); o.className='option'; o.textContent = op;
         o.addEventListener('click', ()=> {
-          // deselect others
-          div.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));
+          card.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));
           o.classList.add('selected');
         });
-        div.appendChild(o);
+        card.appendChild(o);
       });
-      quizContainer.appendChild(div);
+      container.appendChild(card);
     });
 
-    // restore previous answers if any
-    const saved = JSON.parse(localStorage.getItem('physics_quiz_answers_v2') || 'null');
+    // restore saved
+    const saved = JSON.parse(localStorage.getItem('physics_quiz_v3') || 'null');
     if(saved && Array.isArray(saved)){
-      saved.forEach((sel, idx)=>{
-        const card = quizContainer.children[idx];
-        if(card && sel !== null){
+      saved.forEach((s, i)=>{
+        const card = container.children[i];
+        if(card && s !== null){
           const opts = card.querySelectorAll('.option');
-          if(opts[sel]) opts[sel].classList.add('selected');
+          if(opts[s]) opts[s].classList.add('selected');
         }
       });
     }
@@ -236,38 +225,38 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   submit.addEventListener('click', ()=>{
     const answers = [];
-    quizContainer.querySelectorAll('.qcard').forEach((card, idx)=>{
+    container.querySelectorAll('.qcard').forEach((card, i)=>{
       const sel = card.querySelector('.option.selected');
       answers.push(sel ? Array.from(card.querySelectorAll('.option')).indexOf(sel) : null);
     });
-    localStorage.setItem('physics_quiz_answers_v2', JSON.stringify(answers));
+    localStorage.setItem('physics_quiz_v3', JSON.stringify(answers));
     // grade
     let score = 0;
-    answers.forEach((a,i)=>{ if(a !== null && a === bank[i].a) score++; });
-    const perc = (score / bank.length * 100).toFixed(1);
-    result.innerHTML = `<div>امتیاز: ${score} / ${bank.length} — درصد: ${perc}%</div>`;
+    answers.forEach((a, i)=>{ if(a !== null && a === bank[i].a) score++; });
+    const pct = (score / bank.length * 100).toFixed(1);
+    result.innerHTML = `<div>امتیاز: ${score} / ${bank.length} — ${pct}%</div>`;
 
-    // detailed feedback
-    const fb = document.createElement('div'); fb.className = 'card';
-    fb.innerHTML = '<h3>بازخورد سوال به سوال</h3>';
+    const fb = create('div'); fb.className='card';
+    fb.innerHTML = '<h3>بازخورد</h3>';
     bank.forEach((q,i)=>{
-      const p = document.createElement('p');
+      const p = create('p');
       const user = answers[i] === null ? 'بدون پاسخ' : q.opts[answers[i]];
       p.innerHTML = `<b>سوال ${i+1}:</b> پاسخ شما: <i>${user}</i> — پاسخ صحیح: <i>${q.opts[q.a]}</i>`;
       fb.appendChild(p);
     });
     result.appendChild(fb);
+    window.scrollTo({top:result.offsetTop - 80, behavior:'smooth'});
   });
 
   clearBtn.addEventListener('click', ()=>{
-    if(confirm('آیا مطمئن هستید می‌خواهید پاسخ‌ها پاک شوند؟')){
-      localStorage.removeItem('physics_quiz_answers_v2');
+    if(confirm('پاک کردن پاسخ‌ها؟')){
+      localStorage.removeItem('physics_quiz_v3');
       render();
       result.innerHTML = '';
-      alert('حذف شد.');
     }
   });
 
 })();
 
-/* ==================== End of main.js ==================== */
+/* simple show helper */
+function show(sel){ const e = document.querySelector(sel); if(e) e.style.display = 'block'; }
