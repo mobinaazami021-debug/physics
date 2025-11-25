@@ -3,29 +3,38 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>تندی لحظه‌ای — آزمایشگاه حرکت</title>
-<link rel="stylesheet" href="style.css">
+<title>تندی متوسط — آزمایشگاه حرکت</title>
+<link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-<header class="page-header">
-  <a class="back" href="index.html">⟵ بازگشت</a>
-  <h1>تندی لحظه‌ای</h1>
-</header>
+<div class="header">
+  <div class="meta">ارائه‌دهنده: <strong>مبینا اعظمی</strong></div>
+  <h1>تندی متوسط</h1>
+</div>
 
-<main class="card single">
-  <h2>تعریف</h2>
-  <p>تندی متحرک در هر لحظه را <strong>تندی لحظه‌ای</strong> می‌نامند. یکای اصلی تندی لحظه‌ای مانند تندی متوسط، متر بر ثانیه است.</p>
-  <p>نماد معمول: <code>v(t)</code> برای بیان تندی لحظه‌ای استفاده می‌شود.</p>
+<div class="container">
+  <a href="index.html" style="display:inline-block;margin-bottom:12px;background:var(--card-bg);padding:8px 12px;border-radius:8px;">⟵ بازگشت</a>
+  <div class="card">
+    <h2>تعریف</h2>
+    <p>تندی متوسط یک جسم برابر با مسافتی است که آن جسم به‌طور متوسط در واحد زمان طی می‌کند.</p>
 
-  <h3>توضیح کوتاه</h3>
-  <p>در عمل، تندی لحظه‌ای را می‌توان با گرفتن حدِ تندی متوسط وقتی Δt→0 بدست آورد:</p>
-  <p><code>v(t) = \lim_{\Delta t \to 0} \dfrac{\Delta s}{\Delta t}</code></p>
+    <h3>برای محاسبهٔ تندی متوسط نیاز داریم</h3>
+    <ol>
+      <li>مسافتی که جسم پیموده است (S)</li>
+      <li>زمانی که طول کشیده تا جسم این مسافت را طی کند (t)</li>
+    </ol>
 
-  <h3>مثال تعاملی — اندازه‌گیری تندی لحظه‌ای</h3>
-  <div class="stage" id="inst-speed-stage"></div>
-  <p>برای مشاهدهٔ تندی لحظه‌ای، از شبیه‌ساز در صفحهٔ بازی‌ها استفاده کن (دقت زمانی و ورودی‌ها).</p>
-</main>
+    <h3>فرمول</h3>
+    <p><code>v_{avg} = S / t</code></p>
 
-<script src="scripts.js"></script>
+    <h3>مثال تعاملی</h3>
+    <p>مقدار مسافت (m): <input id="avgS" type="number" value="120" style="width:120px"> — زمان (s): <input id="avgT" type="number" value="2" style="width:120px"></p>
+    <button id="calc-avg-speed" class="btn">محاسبهٔ نمونه</button>
+    <div id="avg-speed-result" class="answer">پاسخ: 60 m/s</div>
+
+  </div>
+</div>
+
+<script src="../main.js"></script>
 </body>
 </html>
