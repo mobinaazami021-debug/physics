@@ -1,49 +1,61 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>آزمایشگاه حرکت — صفحهٔ اصلی</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>آزمایشگاه حرکت — صفحهٔ اصلی</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="meta">
-    <div>ارائه‌دهنده: <strong>مبینا اعظمی</strong> — کلاس: <strong>9/2</strong> — دبیرستان پردیس</div>
-    <div>نام دبیر: <strong>خانم رفیعی</strong></div>
+  <header class="site-header">
+    <div class="meta">
+      <div>ارائه‌دهنده: <strong>مبینا اعظمی</strong> — کلاس: <strong>9/2</strong> — دبیرستان پردیس</div>
+      <div>نام دبیر: <strong>خانم رفیعی</strong></div>
+    </div>
+    <h1>آزمایشگاه تعاملی فصل حرکت — علوم نهم</h1>
+    <p class="lead">درسنامهٔ کامل — مثال‌های تعاملی — بازی‌ها و آزمون‌ها</p>
+    <nav class="top-nav" aria-label="منو">
+      <a href="pages/distance.html">مسافت</a>
+      <a href="pages/displacement.html">جابه‌جایی</a>
+      <a href="pages/avg_speed.html">تندی متوسط</a>
+      <a href="pages/inst_speed.html">تندی لحظه‌ای</a>
+      <a href="pages/avg_velocity.html">سرعت متوسط</a>
+      <a href="pages/inst_velocity.html">سرعت لحظه‌ای</a>
+      <a href="pages/acceleration.html">شتاب</a>
+      <a href="pages/notes.html">نکات قابل توجه</a>
+      <a href="pages/games.html">بازی‌ها و شبیه‌ساز</a>
+      <a href="#" id="quiz-link">آزمون 50 سوالی</a>
+    </nav>
+  </header>
+
+  <main class="home-cards">
+    <section class="card big">
+      <h2>شروع سریع</h2>
+      <p>از منوی بالا یکی از مفاهیم را انتخاب کن — هر صفحه شامل: تعریف دقیق، فرمول‌ها، مثال تعاملی و تمرین است.</p>
+    </section>
+
+    <section class="card">
+      <h3>راهنما</h3>
+      <ul>
+        <li>هر مفهوم در یک صفحهٔ جداگانه قرار دارد.</li>
+        <li>انیمیشن‌ها با SVG/CSS ایجاد شده‌اند و روی موبایل اجرا می‌شوند.</li>
+        <li>آزمون ۵۰ سوالی در همین سایت قرار دارد (دسترسی از طریق لینک بالا).</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">تهیه‌شده توسط مبینا اعظمی — دبیرستان پردیس</footer>
+
+  <div id="quiz-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+    <div class="modal-inner">
+      <h2 id="quiz-title">آزمون فصل حرکت — 50 سوال</h2>
+      <div id="quiz-root"></div>
+      <div class="modal-actions">
+        <button id="quiz-close" class="btn ghost">بستن</button>
+      </div>
+    </div>
   </div>
-  <h1>آزمایشگاه تعاملی فصل حرکت — علوم نهم</h1>
-  <p class="lead">درسنامهٔ کامل — مثال‌های تعاملی — بازی‌ها و آزمون‌ها</p>
-  <nav class="top-nav">
-    <a href="distance.html">مسافت</a>
-    <a href="displacement.html">جابه‌جایی</a>
-    <a href="avg_speed.html">تندی متوسط</a>
-    <a href="inst_speed.html">تندی لحظه‌ای</a>
-    <a href="avg_velocity.html">سرعت متوسط</a>
-    <a href="inst_velocity.html">سرعت لحظه‌ای</a>
-    <a href="acceleration.html">شتاب</a>
-    <a href="notes.html">نکات قابل توجه</a>
-    <a href="games.html">بازی‌ها و شبیه‌ساز</a>
-  </nav>
-</header>
 
-<main class="home-cards">
-  <section class="card big">
-    <h2>شروع سریع</h2>
-    <p>از منوی بالا یکی از مفاهیم را انتخاب کن — هر صفحه شامل: تعریف دقیق، فرمول‌ها، مثال تعاملی و تمرین است.</p>
-  </section>
-
-  <section class="card">
-    <h3>راهنما</h3>
-    <ul>
-      <li>هر مفهوم یک کارت مستقل و کامل دارد.</li>
-      <li>انیمیشن‌ها برای فهم دیداری هستند — با کنترل‌های روبه‌روی هر مثال سرعت و حالت را تغییر بده.</li>
-      <li>در بخش بازی‌ها می‌توانی حرکت را شبیه‌سازی و محاسبات را انجام دهی.</li>
-    </ul>
-  </section>
-</main>
-
-<footer class="site-footer">تهیه‌شده توسط مبینا اعظمی — دبیرستان پردیس</footer>
-<script src="scripts.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
